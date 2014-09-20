@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\begin{document}
+\pagestyle{headings}
+\markright{Design and Analysis of Algorithms}
+\centerline{Eric Bronner, Aedan Dispenza, Jason Davis, Timothy Yong}
+\centerline{CS513 - Dr. Farach-Colton}
+\centerline{\underline{Homework 2}}
+\noindent \underline{Problem 1}\\
+\underline{Problem 2}\\
+\underline{Problem 3}\\
+\underline{Problem 4}\\
+Say $x$ is a number in $col_n$, and $y$ is a number in $col_{n+1}$.\\
+Case 1: $x$ and $y$ are in the top (least) row, post-sort\\
+\indent $y \leq z$, $\forall z \in col_{n+1}$\\
+\indent $x \leq w$, $\forall w \in col_{n}$\\
+\indent Because $y$ is in $col_{n+1}$, it must be greater than at least one elemen in $col_n$.\\
+\indent As stated, $x$ is the least number in $col_n$.\\
+\indent Therefore, $x$ is either that number, or less than it.\\
+Case 2: $x$ and $y$ are in the bottom (most) row, post-sort\\
+\indent $y \geq z$, $\forall z \in col_{n+1}$\\
+\indent $x \geq w$, $\forall w \in col_{n}$\\
+\indent Because x is in $col_n$, it must be less than at least one element in $col_{n+1}$.\\
+\indent As stated, $y$ is the greatest number in $col_{n+1}$.\\
+\indent Therefore, $y$ is either that number, or greater than it.\\
+Case 3: $x$ and $y$ are in any other row\\
+\indent an $x$ and $y$ in row m must have been greater than exactly m other\\
+\indent \indent elements in their respective row.\\
+\underline{Problem 5}\\
+\underline{Problem 6}\\
+\end{document}

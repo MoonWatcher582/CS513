@@ -1,0 +1,207 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\begin{document}
+\pagestyle{headings}
+\markright{Design and Analysis of Algorithms}
+
+\centerline{Eric Bronner, Aedan Dispenza, Timothy Yong, Jason Davis}
+\centerline{CS-513 - Dr. Farach-Colton}
+\centerline{\underline{Homework 1}}
+
+\underline{Problem 1}\\
+\indent $d+1 \leq n \leq 2^{d+1} -  1$\\
+\indent Proof by Induction:\\
+
+1. Base Case:\\
+\indent \indent tree of $n =1$, $d = 0$.
+\begin{center}
+$0 + 1 \leq 1 \leq 2^{0+1} - 1$\\
+$1 \leq 1 \leq 1$\\
+\end{center}
+
+2. Inductive Hypothesis:\\
+\indent \indent Assume the number of nodes n in a completely sparse tree $n(d-1) = d$.\\
+
+3. Inductive Step:
+\begin{center}
+$n(d) = n(d-1)+ 1$\\
+$n(d) = d + 1$ $\square$\\
+\end{center}
+
+Proof by Induction:\\
+
+1. Base Case:\\
+\indent \indent tree of $n = 1$, $d = 0$.
+\begin{center}
+$\log{n} \leq d \leq n-1$ \\
+$log{1} \leq 0 \leq 1-1$\\
+$0 \leq 0 \leq 0$\\
+\end{center}
+
+2. Inductive Hypothesis: \\
+\indent \indent Assume we have two subtrees of the same depth\\ 
+\indent \indent and the number of nodes $n(d-1) = 2^{(d-1)+1} -1$ for each subtree, \\
+\indent \indent thus $n(d-1) = 2^d -1$.\\
+
+3. Inductive Step: 
+\begin{center}
+$n(d) = n(d-1) \times 2 + 1$ \\ 
+$n(d) = (2^d-1) \times 2 + 1$\\
+$n(d) = 2\times2^d - 2 + 1$\\
+$n(d) = 2^{d +1} - 1$ $\square$\\
+\end{center}
+\indent \indent where the $\times 2$ is derived from the two subtrees, \\
+\indent and the $+1$ from the root node.\\
+
+\underline{Problem 2}\\
+
+a) $T(1) = 1$, $T(n) = T(\frac{n}{2}) + 1$ for $n = 2^k$, $k \in \mathbb{N}$\\
+\indent \indent $T(n) = T(\frac{n}{2}) + 1$\\
+\indent \indent \indent $= (T(\frac{n}{2^2}) + 1) + 1$\\
+\indent \indent \indent $=((T(\frac{n}{2^3}) + 1) +1) + 1$\\
+\indent \indent \indent repeat this recursion $k$ times...\\
+\indent \indent \indent $=T(\frac{n}{2^k}) + k$\\
+\indent \indent \indent $=T(\frac{2^k}{2^k}) + k$ as $n = 2^k$\\
+\indent \indent \indent $=T(1) + k$\\
+\indent \indent \indent $=1 + k$\\
+\indent \indent \indent $=1 + log{n}$\\
+
+b) $T(1) = 1$, $T(n) = 2T(\frac{n}{2}) + 1$ for $n = 2^k$, $k \in \mathbb{N}$\\
+\indent\indent $T(n) = 2T(\frac{n}{2}) + 1$\\
+\indent\indent\indent $= 2(2T(\frac{n}{2^2}) + 1) + 1$\\
+\indent\indent\indent $= 2^2T(\frac{n}{2^2}) + 2 + 1$\\
+\indent\indent\indent $= 2(2^2T(\frac{n}{2^3}) + 2 + 1) + 1$\\
+\indent\indent\indent $= 2^3T(\frac{n}{2^3}) + 4 + 2 + 1$\\
+\indent \indent \indent repeat this recursion $k$ times...\\
+\indent\indent\indent $= 2^kT(\frac{n}{2^k}) + 2^k - 1$\\
+\indent\indent\indent $= 2^kT(1) + 2^k - 1$\\
+\indent\indent\indent $= 2 \times 2^k - 1$\\
+\indent\indent\indent $= 2n - 1$\\
+
+c) $T(1) = 1$, $T(n) = 2T(\frac{n}{2}) + n$ for $n = 2^k$, $k \in \mathbb{N}$\\
+\indent\indent $T(n) = 2T(\frac{n}{2}) + n$\\
+\indent\indent\indent $= 2(2T(\frac{n}{2^2}) + \frac{n}{2}) + n$\\
+\indent\indent\indent $= 2^2T(\frac{n}{2^2}) + n + n$\\
+\indent\indent\indent $= 2(2^2T(\frac{n}{2^3}) + \frac{n}{2} + \frac{n}{2}) + n$\\
+\indent\indent\indent $= 2^3T(\frac{n}{2^3}) + n + n + n$\\
+\indent\indent\indent $= 2^kT(\frac{n}{2^k}) + kn$\\
+\indent\indent\indent $= 2^kT(1) + kn$\\
+\indent\indent\indent $= 2^k + kn$\\
+\indent\indent\indent $= n + nlog{n}$\\
+
+\underline {Problem 3}\\
+\indent a) $\sum_{i=1}^k i(i+1) = k(k+1)(k+2)/3$\\
+
+Base Case P(1):\\
+\begin{center}
+$1(1+1) = \frac{1(1+1)(1+2)}{3}$\\
+$2 = \frac{6}{3}$\\
+$2 = 2$\\
+\end{center}
+
+Inductive Step:
+\begin{center}
+$T(k+1) = T(k) + (k+1)((k+1) +1) = T(k) + (k+1)(k+2)$\\
+$\frac{(k+1)((k+1)+1)((k+1)+2)}{3} = \frac{k(k+1)(k+2)}{3} + (k+1)(k+2)$\\
+$\frac{(k+1)(k+2)(k+3)}{3} = \frac{k(k+1)(k+2)}{3} + (k+1)(k+2)$\\
+$\frac{k(k+1)(k+2)}{3} + \frac{3(k+1)(k+2)}{3} = \frac{k(k+1)(k+2)}{3} + (k+1)(k+2)$\\
+$\frac{k(k+1)(k+2)}{3} + (k+1)(k+2) = \frac{k(k+1)(k+2)}{3} + (k+1)(k+2)$ $\square$\\
+\end{center}
+
+b) $\sum_{i=0}^k i2^i = (k-1)2^{k+1} + 2$\\
+
+Base Case P(0):
+\begin{center}
+$0(2^0) = (0-1)2^{0+1} + 2$\\
+$0 = -2^1 + 2$\\
+$0 = 0$\\
+\end{center}
+
+Inductive Step:
+\begin{center}
+$T(k+1) = T(k) + (k+1)2^{k+1}$\\
+$(k)2^{(k+1)+1} + 2 = (k-1)2^{k+1} + 2 + (k+1)2^{k+1}$\\
+$k2^{k+2} + 2 = k2^{k+1} - 2^{k+1} + 2 + k2^{k+1} + 2^{k+1}$\\
+$4k2^k + 2 = 2k2^{k+1} + 2$\\
+$4k2^k + 2 = 4k2^k + 2$ $\square$\\
+\end{center}
+
+c)$\sum_{i=0}^k \frac{i}{2^i} = 2 - \frac{(k+2)}{2^k}$\\
+
+Base Case P(0):
+\begin{center}
+$\frac{0}{2^0} = 2 - \frac{(0+2)}{2^0}$\\
+$0 = 2 - \frac{2}{1}$\\
+$0 = 0$\\
+\end{center}
+
+Inductive Step:
+\begin{center}
+$T(k+1) = T(k) + \frac{(k+1)}{2^{k+1}}$\\
+$2 - \frac{((k+1)+2)}{2^{k+1}} = 2 - \frac{(k+2)}{2^k} + \frac{(k+1)}{2^{k+1}}$\\
+$\frac{-k-1-2}{2^{k+1}} = \frac{-k-2}{2^k} + \frac{k+1}{2^{k+1}}$\\
+$\frac{-k-1}{2^{k+1}} + \frac{-2}{2^{k+1}} = \frac{-k-2}{2^k} + \frac{k+1}{2^{k+1}}$\\
+$-2\frac{k+1}{2^{k+1}} + \frac{-2}{2^{k+1}} = \frac{-k-2}{2^k}$\\
+$\frac{-k-1}{2^k} + \frac{-1}{2^k} = \frac{-k-2}{2^k}$\\
+$\frac{-k-2}{2^k} = \frac{-k-2}{2^k}$ $\square$\\
+\end{center}
+
+\underline{Problem 4}\\
+\indent Place the following in increasing asymptotic order:\\
+\indent \indent $4n, n^2, n\log{n}, n\ln{n}, \log{n}, e^n$\\
+
+First we, drop all constants, so $4n = O(n)$. \\
+\indent $O(\log{n}) < O(n) < O(n^2) < O(e^n)$.\\
+\indent $O(n\log{n})$ and $O(n\ln{n})$ are both greater than $O(n)$ and less than $O(n^2)$.
+ \begin{center}
+$ n\log{n} > n\ln{n}$\\
+$\log{n} > \ln{n}$\\
+ \end{center}
+
+ 
+Therefore, the correct order is:\\
+\indent \indent $ \log{n}, 4n, n\ln{n}, n\log{n}, n^2, e^n$.\\
+
+\underline{Problem 5}\\
+\indent Proof by Contradiction:\\
+\indent Say we have $T$ and $T*$, both are $MST of G$ and $T \neq T*$\\
+\indent Because $\forall e$, $e' \in E$, $w(e) \neq w(e')$ where w(e) is the weight of e,\\ 
+\indent all edges can be identified by their unique weight\\
+\indent Say $e \in E \in T$, $e' \in E \in T*$, where $e$, $e' \in E \in G$\\
+\indent \indent Case 1: $w(e) > w(e')$\\
+\indent\indent\indent then $w(T) > w(T*)$, where w(T) is the sum of all weights\\
+\indent\indent\indent therefore, T is not an MST of G, which is a contradiction\\
+\indent \indent Case 2: $w(e) < w(e')$\\
+\indent\indent\indent then $w(T) < w(T*)$, where w(T) is the sum of all weights\\
+\indent\indent\indent therefore, T* is not an MST of G, which is a contradiction\\
+\indent \indent Case 3: $w(e) = w(e')$\\
+\indent\indent\indent then $w(T) = w(T*)$, where w(T) is the sum of all weights\\
+\indent\indent\indent therefore, T = T*, which is a contradiction $\square$\\ 
+
+\underline{Problem 6}\\
+\indent Given a matrix-representation of a graph, and the following functions: 
+\indent \indent Connect(u,v) which runs in $O(1)$\\
+\indent \indent Disconnect(u,v) which runs in $O(1)$\\
+\indent \indent Adj(u,v) which runs in $O(1)$\\ 
+\indent we have developed the following algorithm:\\
+
+HamC(G):\\
+\indent \indent Adj(u,v):\\
+\indent \indent \indent Disconnect(u,v)\\
+\indent \indent \indent HamC(G):\\
+\indent \indent \indent \indent FALSE\\
+\indent \indent \indent Else:\\
+\indent \indent \indent \indent TRUE\\
+\indent \indent Else:\\
+\indent \indent \indent FALSE\\
+\indent Else:\\
+\indent  \indent Connect(u,v)\\
+\indent \indent HamC(G):\\
+\indent \indent \indent TRUE\\
+\indent \indent Else:\\
+\indent \indent \indent FALSE\\
+
+Due to the use of HamC(G), this algorithm runs in $O(n)$.\\
+
+\end{document}
