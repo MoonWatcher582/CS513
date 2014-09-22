@@ -8,25 +8,65 @@
 \centerline{CS513 - Dr. Farach-Colton}
 \centerline{\underline{Homework 2}}
 \noindent \underline{Problem 1}\\
+\centerline{\underline{Algorithm:}}\\
+1. Sort the first $k$ elements with merge sort\\ 
+2. Perform insertion sort on previous $k-1$ elements based on binary search\\
+\indent $k-1$, because, once the first $k$ elements are sorted,\\ 
+\indent the first element must be in the correct spot.\\
+\indent We ignore one more element per each iteration.\\
+\centerline{\underline{Proof of Correctness by Contradiction:}}\\
+Assume $\exists a \in A$, where $A$ is the $k$-sorted array post-sort, s.t. $a$ is not sorted.\\
+Case 1: $a$ is within range of the previous $k-1$ elements\\
+\indent Either merge sort or insertion sort must have failed.\\
+\indent This is a contradiction, as merge sort and insertion sort do not fail.\\
+Case 2: $a$ is not within $k$ elements of where it started\\
+\indent This is a contradiction, as this means that $a$ was not $k$-sorted to begin\\
+Therefore, $a$ cannot exist, and the algorithm must work $\square$\\
+\centerline{\underline{Running-Time Analysis:}}\\
+Merge sorting the first $k$ elements will take $klog{k}$ time\\
+Binary search-based insertion sort for $n-k$ elements will take\\
+\indent $(n-k)log{(k-1)}$ time\\  
+In total, the running time is $klog{k} + nlog{k} - klog{(k-1)}$\\
+Therefore, the running time is $O(nlog{k})$, as $n \geq k$\\
 \underline{Problem 2}\\
+Suppose we have a k-sorted array $A$\\
+For every element $a \in A$ there are $k$ possible placements in $n$ total bins\\
+So the number of posssibilities is $\prod_{i = 0}^{n} k = k^n$\\
+If we take the logarithm of this (because of the decision tree), we get:\\
+\indent $log(k^n) = nlog(k)$\\
+So it's $\Omega(nlog(k))$\\
 \underline{Problem 3}\\
 \underline{Problem 4}\\
-Say $x$ is a number in $col_n$, and $y$ is a number in $col_{n+1}$.\\
-Case 1: $x$ and $y$ are in the top (least) row, post-sort\\
-\indent $y \leq z$, $\forall z \in col_{n+1}$\\
-\indent $x \leq w$, $\forall w \in col_{n}$\\
-\indent Because $y$ is in $col_{n+1}$, it must be greater than at least one elemen in $col_n$.\\
-\indent As stated, $x$ is the least number in $col_n$.\\
-\indent Therefore, $x$ is either that number, or less than it.\\
-Case 2: $x$ and $y$ are in the bottom (most) row, post-sort\\
-\indent $y \geq z$, $\forall z \in col_{n+1}$\\
-\indent $x \geq w$, $\forall w \in col_{n}$\\
-\indent Because x is in $col_n$, it must be less than at least one element in $col_{n+1}$.\\
-\indent As stated, $y$ is the greatest number in $col_{n+1}$.\\
-\indent Therefore, $y$ is either that number, or greater than it.\\
-Case 3: $x$ and $y$ are in any other row\\
-\indent an $x$ and $y$ in row m must have been greater than exactly m other\\
-\indent \indent elements in their respective row.\\
+\underline{Proof by Induction:}\\
+Base: $\exists$ only one column\\
+\indent The row is sorted by definition and default, as it's length is $1$\\
+\indent So, if we sort vertically, nothing can change.\\
+Inductive Hypothesis: \\
+\indent Assume that for some number of sorted columns $\leq n$, we can\\
+\indent\indent maintain horizontal sort after vertically sorting.\\
+Inductive Step:\\
+\indent Add a new column (the $n+1^{th}$), keeping the rows sorted\\
+\indent Sort the new column; compare the new element at position $i$\\
+\indent\indent to the element that was previously there.\\
+\indent Case 1: Element is the same\\
+\indent\indent Nothing has changed; the row must still be sorted.\\
+\indent Case 2: Position $i$ now holds a greater value\\
+\indent\indent Because the rows up to column $n$ are still sorted, and\\ 
+\indent\indent\indent the value in position $i$ has only increased, the row must be sorted\\
+\indent Case 3: Position $i$ now holds a smaller value, $x$\\
+\indent\indent $x$ originated elsewhere in the column\\
+\indent\indent $x$ must belong at position $i$, proven by contradiction:\\
+\indent\indent\indent Assume $x$ is less than the value in the column next to it, same row\\
+\indent\indent\indent If try to resort $x$ by moving it up in the column, two cases emerge:\\
+\indent\indent\indent Case 1: $x$ is always less than the value in the before it\\
+\indent\indent\indent\indent This is a contradiction, as $x$ doesn't belong in this column,\\
+\indent\indent\indent\indent since the rows were originally sorted\\
+\indent\indent\indent Case 2: We find a new place for $x$\\
+\indent\indent\indent\indent We must have displaced another element, $y$ s.t. $y < x$\\
+\indent\indent\indent\indent But, because $y$ is less than everything below it,\\ 
+\indent\indent\indent\indent\indent as we've already sorted the column,\\ 
+\indent\indent\indent\indent\indent we have a new out-of-place element\\
+\indent\indent\indent\indent Therefore, we have a contradiction $\square$\\
 \underline{Problem 5}\\
 \underline{Problem 6}\\
 \end{document}
