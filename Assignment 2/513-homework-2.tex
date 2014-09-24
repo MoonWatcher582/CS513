@@ -36,6 +36,35 @@ If we take the logarithm of this (because of the decision tree), we get:\\
 \indent $log(k^n) = nlog(k)$\\
 So it's $\Omega(nlog(k))$\\
 \underline{Problem 3}\\
+a) Suppose we have two subtrees, $l$ and $h$ of a tree $T$, where $l$ is the lighter\\
+\indent subtree, $h$ is the heavier subtree and $w(h) = 2 \times w(l) + 1$. The number\\
+\indent of nodes in the tree is $n$, so there are $n-3$ nodes beneath the root and\\
+\indent its children.\\
+\begin{center}
+$w(h) = 2w(l) + 1$\\
+$n - 3 = 2w(l) + 1 + w(l)$\\
+$n - 3 = 3w(l) + 1$\\
+$\frac{n - 4}{3} = w(l)$\\
+\end{center}
+\indent\indent So this means that $w(l) = \frac{n - 4}{3}$ and $w(h) = \frac{2n - 8}{3} + 1$\\
+\indent Thus, $h(h) = log{(\frac{2n-8}{3} + 1)}$ and $h(l) = log{(\frac{n - 4}{3})}$\\
+\indent So, we have $O(logn)$ time to search both subtrees.\\
+\indent Adding the 3 removed nodes only adds a constant factor.\\
+b) Suppose we have a tree $T$, s.t. $T$ is the bare minimum tree that maintains\\
+\indent the balance property, without the two subtrees being of equal weight.\\
+\indent If we add another node to $h$, then we would rebuild the subtree all the\\
+\indent way up to the root via AVL rotation.\\
+\indent This rotation takes $O(log(n))$ time due to $T$ having $log(n)$ levels.\\
+c) 1 or 2 insertions are required to unbalance a freshly balanced tree.\\
+\indent It is 1 insertion if one subtree is complete, 2 in any other case.\\
+d) The probability of unbalancing the tree in the worst case scenario\\
+\indent\indent is $\frac{1}{n}log(n)$\\
+\indent The number of nodes we need to add unbalance the tree again after\\
+\indent \indent rebalancing is $\sum_{i=0}^{log(n)} \frac{n}{2^i} = 2n$\\
+\indent So, the worst case cost of unbalancing and rebalancing the tree is $2nlog(n)$.\\
+\indent The cost to insert all nodes that do not lead to a worst case is $n-log(n)$.\\
+\indent So, the cost of $n$ insertions is $nlogn + (n  - log(n))$, or $O(nlog(n))$.\\
+e) The amortized cost is $\frac{nlog(n)}{n} = O(logn)$\\
 \underline{Problem 4}\\
 \underline{Proof by Induction:}\\
 Base: $\exists$ only one column\\
@@ -68,5 +97,14 @@ Inductive Step:\\
 \indent\indent\indent\indent\indent we have a new out-of-place element\\
 \indent\indent\indent\indent Therefore, we have a contradiction $\square$\\
 \underline{Problem 5}\\
+Say we have a graph $G$\\
+We will call HamP on every pair of nodes in $G$.\\
+If HamP returns true for any pair of nodes and those two nodes are\\
+\indent connected, then we have found a Hamiltonian Cycle\\
+This process will take $O(n^2) \in P$\\
 \underline{Problem 6}\\
+Say we have a graph $G$\\
+If we call HamP on every of nodes in G, we will either find a Hamiltonian\\ 
+\indent Path or find that there is none.\\
+This algorithm will take $\frac{n(n-1)}{2}$  or $O(n^2) \in P$
 \end{document}
