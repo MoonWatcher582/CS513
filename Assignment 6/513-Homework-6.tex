@@ -1,0 +1,66 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{Assignment 6}
+
+\author{Timothy Yong, Eric Bronner, Aedan Dispenza, Jason Davis}
+
+\date{11/11/14}
+
+\begin{document}
+\maketitle
+
+\bigskip
+
+\noindent PROBLEM 1
+
+\begin{enumerate}
+
+\item[1.] Build a prefix tree out of the set of strings, $D$.  $O(n)$
+\item[2.] Query prefix tree to find $S_1$ and $S_2$. $O(m)$ (Essentially, the tree runs in $<O(n), O(m)>$)
+\item[3.] Compute $LCA(S_1,S_2)$. $<O(n), O(1)>$ 
+
+\item[] This algorithm runs in $<O(n), O(m)>$, but can be reduced by hashing all leaf labels to $<O(n), O(1)>$.
+
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\noindent PROBLEM 2
+
+\begin{enumerate}
+
+\item[a.] Construct a tree out of the string such that palindromes are recursively defined, and all other substrings are just one node. The number of edges in a tree is $O(n)$ in respect to the length of the string, so there cannot be more than linear palindromes.
+
+ \item[b.] Build a non-compressed suffix tree out of the string, and another of the reversed string. Take the intersection of these trees. Trim all branches that are not palindromes.  $<O(nm), O(m)>$
+
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\noindent PROBLEM 3
+
+\begin{enumerate}
+
+\item[]  Build a non-compressed suffix tree out of the string, and another of the reversed string. Take the intersection of these trees; whatever intersects is a palindrome. Use DFS to preprocess the depths of the substrings. $O(n)$
+
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\noindent PROBLEM 4
+
+\begin{enumerate}
+
+\item[]  Construct a compressed suffix tree $T$ out of $S$. Remove all leaf nodes and traverse the tree. Get the intersection between the tree returned from the algorithm from problem 2 and $T$, and store it in $U$. Subtract $U$ from $T$. The longest remaining substring is the longest repeated substring.
+
+\end{enumerate}
+
+\end{document}

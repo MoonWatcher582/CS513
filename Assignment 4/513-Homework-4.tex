@@ -1,0 +1,75 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{Assignment 4}
+
+\author{Timothy Yong, Eric Bronner, Aedan Dispenza, Jason Davis}
+
+\date{10/6/14}
+
+\begin{document}
+\maketitle
+
+\bigskip
+
+\noindent PROBLEM 1
+
+\begin{enumerate}
+
+\item[a)] Algorithm: Run the Dueling Algorithm for constructing a cartesian tree, but if a node is about to be inserted under a node of the same value, do not insert it.
+
+\item[b)] Counter Example: $\exists u,v$, both of which are subtrees of $T$, s.t. $h(u) < h(v)$. Given that $u$ is visited first by the Eulerian Tour, and a Cartesian Tree is thus constructed from this Eulerian Tour, after doing the Cartesian Update from $v$, $\exists$ at least one edge which exists in the Cartesian Tree, but not in $T$. 
+
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\noindent PROBLEM 2
+
+\begin{enumerate}
+
+\item[] Given that $k$ is the amount of bits in the representation of a number, and $log{n}$ is the amount of bits that can be evaluated in constant time, then this algorithm is $O(1)$ if $k \leq log{n}$, or $O(\frac{k}{log{n}})$ if $k > log{n}$.
+
+\item[] This algorithm runs in $\frac{log{b}}{log{n}} = log_n{b}$ time. Given that $b < n$, this algorithm is $O(1)$. 
+
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\noindent PROBLEM 3
+
+\begin{enumerate}
+\item[] Algorithm $LCA_T(V')$:\\
+\begin{enumerate}
+
+\item[1] Do a preorder traversal on $T(v)$ to get one of the outermost leaves $p$.
+\item[2] Do a postorder traversal on $T(v)$ to get one of the outermost leaves $q$.
+\item[3] Run $LCA(p,q)$.
+
+\end{enumerate}
+
+\item[] Algorithm M:\\
+\begin{enumerate}
+
+\item[1] Get $S(v)$ by running a DFS on the tree rooted at $v$.
+\item[2] $LCA_T(S(v))$
+
+\end{enumerate}
+\end{enumerate}
+\bigskip
+\bigskip
+
+\noindent PROBLEM 4
+
+\begin{enumerate}
+
+\item[] If we do the set cover of all edges in graph $G$, in Polynomial time, then we have determined that for the input graph $G$, $\exists V' \leq K$, s.t. $V'$'s edges comprise all of the edges inside of graph $G$, therefore solving Vertex Cover.
+
+\end{enumerate}
+
+\end{document}
